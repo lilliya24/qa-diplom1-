@@ -1,19 +1,18 @@
-package test;
+package ru.netology.test;
 
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
-import ru.netology.data.DataHelper;
 import ru.netology.data.SQLHelper;
+import ru.netology.page.CreditPage;
 import ru.netology.page.MainPage;
-import ru.netology.page.PaymentPage;
 
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class UsualPaymentTest {
+public class CreditPaymentTest {
     private MainPage mainPage;
-    private PaymentPage paymentPage;
+    private CreditPage creditPage;
 
     @BeforeAll
     static void setUpAll() {
@@ -30,7 +29,7 @@ public class UsualPaymentTest {
 
         open("http://localhost:8080/");
         mainPage = new MainPage();
-        paymentPage = mainPage.goToPaymentPage();
+        creditPage = mainPage.goToCreditPage();
     }
 
     @AfterEach
@@ -42,10 +41,10 @@ public class UsualPaymentTest {
     @DisplayName("Покупка картой «APPROVED»")
     void shouldTestBuyCardForStatusApproved() {
 
-        PaymentPage.fillInCardInfo(DataHelper.getCardNumberForStatusApproved());
-        PaymentPage.setSuccessNotificationVisible();
-        assertEquals("APPROVED", SQLHelper.getStatusForPayment());
+        CreditPage.fillInCardInfo(DataHelper.getCardNumberForStatusApproved());
+        CreditPage.setSuccessNotificationVisible();
+        assertEquals("APPROVED", SQLHelper.getStatusForCredit());
 
     }
-}
 
+}

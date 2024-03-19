@@ -1,15 +1,13 @@
-package ru.netology.page;
+package page;
 
 
 import com.codeborne.selenide.SelenideElement;
-import ru.netology.data.DataHelper;
-
 import java.time.Duration;
-
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
+import data.DataHelper;
 
 public class CreditPage {
     private SelenideElement heading = $$("h3").find(text("Кредит по данным карты"));
@@ -34,7 +32,6 @@ public class CreditPage {
     }
 
     public static void fillInCardInfo(DataHelper.CardInfo cardInfo) {
-
         cardNumberField.sendKeys(cardInfo.getCardNumber());
         monthField.sendKeys(cardInfo.getMonth());
         yearField.sendKeys(cardInfo.getYear());
@@ -62,6 +59,7 @@ public class CreditPage {
     public static void textValidationForTheCVCField(String text) {
         cvcField.shouldHave(text(text), Duration.ofSeconds(12)).shouldBe(visible);
     }
+
 
     public static void setSuccessNotificationVisible() {
         successNOTIF.shouldBe(visible, Duration.ofSeconds(12));
